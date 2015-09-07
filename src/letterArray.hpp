@@ -16,8 +16,6 @@ class letterArray{
 	public:
 		letterArray();
 
-		int test = 15;
-
 		isoLetters *letterA[NUM_LETTERS];
 
 		void makeArray();
