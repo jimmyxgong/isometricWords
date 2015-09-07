@@ -18,7 +18,7 @@ int main(){
 
 	std::cout << "Please type in your message" << std::endl;
 	std::cin >> message;
-	std::cout << "Horizontal orietation? (y/n)" << std::endl;
+	std::cout << "Horizontal orientation? (y/n)" << std::endl;
 	std::cin >> orietation;
 
 	stringLength = message.length();
