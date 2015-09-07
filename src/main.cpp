@@ -4,6 +4,7 @@
  */
 
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include <ctype.h>
 #include <string>
@@ -15,9 +16,10 @@ int main(){
 	char orietation;
 	int stringLength;
 	std::string message;
+	std::fstream outFile( "result.txt" );
 
 	std::cout << "Please type in your message" << std::endl;
-	std::cin >> message;
+	std::getline(std::cin, message);
 	std::cout << "Horizontal orientation? (y/n)" << std::endl;
 	std::cin >> orietation;
 
@@ -40,7 +42,7 @@ int main(){
 				char currChar = *it;
 
 				if( currChar == ' ' ){
-//					std::cout<< " ";
+					std::cout<< "                ";
 					continue;
 				}
 
@@ -48,8 +50,9 @@ int main(){
 				letters->letterA[currVal]->drawHoriz( i );
 			}
 			std::cout << std::endl;
+			//outFile << '\n';
 		}
 	}
-
+	outFile.close();
 	return 0;
 }
