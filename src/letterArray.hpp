@@ -6,15 +6,19 @@
 #ifndef LETTERARRAY_HPP
 #define LETTERARRAY_HPP
 
+const int NUM_LETTERS = 25;
+
 #include <iostream>
 #include "isoLetters.hpp"
 
 class letterArray{
 
 	public:
-		letterArray(){};
-		
-		isoLetters *letterA[25];
+		letterArray();
+
+		int test = 15;
+
+		isoLetters *letterA[NUM_LETTERS];
 
 		void makeArray();
 };

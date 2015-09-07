@@ -13,6 +13,8 @@ letterArray::letterArray(){
 }
 
 // member function implementations
-void makeArray(){
-
+void letterArray::makeArray(){
+	for( int i = 0; i<NUM_LETTERS; i++ ){
+		this->letterA[i] = new isoLetters( i + ASCII_BUF ); 
+	}
 }
