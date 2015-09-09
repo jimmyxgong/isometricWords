@@ -15,9 +15,7 @@ isoLetters::isoLetters( char iso_L ){
 
 // member function implementations
 void isoLetters::drawHoriz( int place ){
-	std::ifstream fontFile( "../fonts/isometric4.txt" );
-	std::ofstream outFile;
-	outFile.open( "result.txt" );
+	std::ifstream fontFile( "fonts/isometric4.txt" );
     std::string line;
 
     if (!fontFile) std::cerr << "Could not open the file!" << std::endl;
@@ -27,21 +25,38 @@ void isoLetters::drawHoriz( int place ){
     int count = 0;
 
     // copying line from font file into output file
-    while(std::getline(fontFile, line)){
+    while( std::getline(fontFile, line) ){
     	if( count == position ){
     		std::cout<< line;
-    		//outFile<<line<<std::flush;
     		break;
     	}
     	count++;
     }
-    outFile.close();
     fontFile.close();
-    
 }
 
 void isoLetters::drawVert( int place ){
 	//TODO
+}
+
+std::string isoLetters::lineToDraw( int place ){
+    std::ifstream fontFile( "fonts/isometric4.txt" );
+    std::string line;
+    if(!fontFile) std::cerr << "Could not open the file!" << std::endl;
+
+    int ascii = this->letter - ASCII_BUF;
+    int position = (ascii*MAXHEIGHT)+place;     // location to copy
+    int count = 0;
+
+    while( std::getline(fontFile, line) ){
+        if( count == position ){
+            fontFile.close();
+            return line;
+        }
+        count++;
+    }
+    fontFile.close();
+    return line;
 }
 
 char isoLetters::getLetter(){

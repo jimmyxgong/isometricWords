@@ -6,6 +6,8 @@
 #ifndef ISOLETTERS_HPP
 #define ISOLETTERS_HPP
 
+#include <string>
+ 
 const int MAXWIDTH = 15;
 const int MAXHEIGHT = 11;
 const int ASCII_BUF = 65;
@@ -22,6 +24,7 @@ class isoLetters{
 		char getLetter();
 		void drawHoriz( int place );
 		void drawVert( int place );
+		std::string lineToDraw( int place );
 };
 
 #endif	//ISOLETTERS_HPP
