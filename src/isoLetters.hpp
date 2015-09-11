@@ -1,6 +1,6 @@
 /* Author: Jimmy X Gong
  * File Name: isoLetters.hpp
- * Description: TODO
+ * Description: Header file for isoLetters.cpp
  */
 
 #ifndef ISOLETTERS_HPP
@@ -20,7 +20,7 @@ class isoLetters{
 
 	public:
 		isoLetters( char iso_L );
-
+		~isoLetters();
 		char getLetter();
 		void drawHoriz( int place );
 		void drawVert();

@@ -1,6 +1,6 @@
 /* Author: Jimmy X. Gong
  * File Name: isoLetters.cpp
- * Description: TODO
+ * Description: A class that holds a letter and its drawing member functions
  */
 
 #include <iostream>
@@ -8,12 +8,21 @@
 #include <string>
 #include "isoLetters.hpp"
  
-// constructor
+/* ===== constructor ===== */
 isoLetters::isoLetters( char iso_L ){
 	this->letter = iso_L;
 }
 
-// member function implementations
+/* ===== deconstructor ===== */
+isoLetters::~isoLetters(){}
+
+
+/* ===== member function implementations ===== */
+
+/* Prints out one line from the text font file of a letter
+ * ARGS: 
+ *      arg 1: place -- varies from 1-11. Defines which line of letter to print 
+ */
 void isoLetters::drawHoriz( int place ){
 	std::ifstream fontFile( "fonts/isometric4.txt" );
     std::string line;
@@ -35,6 +44,7 @@ void isoLetters::drawHoriz( int place ){
     fontFile.close();
 }
 
+/* Prints out the line from font text file of a letter */
 void isoLetters::drawVert(){
 	std::ifstream fontFile( "fonts/isometric4.txt" );
     std::string line;
@@ -57,6 +67,11 @@ void isoLetters::drawVert(){
     }
 }
 
+/* Returns the line in place to draw
+ * ARGS:
+ *      arg 1: place -- varies from 1-11. Defines which line of letter to print
+ * RETURN: a string from font text file that is to be printed
+ */
 std::string isoLetters::lineToDraw( int place ){
     std::ifstream fontFile( "fonts/isometric4.txt" );
     std::string line;

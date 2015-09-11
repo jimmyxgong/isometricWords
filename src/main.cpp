@@ -1,6 +1,6 @@
 /* Author: Jimmy X Gong
  * File Name: main.cpp
- * Description: TODO
+ * Description: Main program driver for isometricWords
  */
 
 #include <iostream>
@@ -11,14 +11,13 @@
 #include "isoLetters.hpp"
 #include "letterArray.hpp"
 
-/* Static variable declartions */
+/* ===== Static variable declartions ===== */
 static int MAXDISPLAYLENGTH = 12;
-//static bool horizontal = false;
 static char saveToFile;
 static char h_orientation;
 static int stringLength;
 
-/* Static function declarations */
+/* ===== Static function declarations ===== */
 
 static std::string toUpperCase( std::string message );
 static void horizontalMessage( letterArray *letters, std::string message );
@@ -27,7 +26,7 @@ static void saveHorizontalMessage( letterArray *letters, std::string message, st
 static void saveVerticalMessage( letterArray *letters, std::string message, std::ofstream& outFile );
 static void cleanUp( letterArray *letters );
 
-/* Main program */
+/* ===== Main program  ===== */
 int main(){
 	std::string message;
 	std::ofstream outFile( "output.txt" );
@@ -65,8 +64,13 @@ int main(){
 	return 0;
 }
 
-/* Static function implementations */
+/* ===== Static function implementations ===== */
 
+/* Converts the message into all uppercase 
+ * ARGS:
+ *		arg 1: message -- string to be put in all upper case
+ * RETURN: returns uppercase message
+*/
 static std::string toUpperCase( std::string message ){
 	for( int i = 0; i < message.length(); i++ ){
 		message[i] = toupper(message[i]);
@@ -75,6 +79,12 @@ static std::string toUpperCase( std::string message ){
 	return message;
 }
 
+/* Prints out the message in isometric font in a horizontal orientation 
+ * ARGS: 
+ *		arg 1: *letters -- letterArray that holds the isoLetter arrays
+ *		arg 2: message -- message to be translated
+ *
+*/
 static void horizontalMessage( letterArray *letters, std::string message ){
 	if( message.length()<MAXDISPLAYLENGTH && ( h_orientation== 'y' || h_orientation == 'Y')  ){
 		std::string::iterator it;
@@ -83,6 +93,7 @@ static void horizontalMessage( letterArray *letters, std::string message ){
 			for( it = message.begin(); it < message.end(); it++ ){
 				char currChar = *it;
 
+				// taking care of spaces
 				if( currChar == ' ' ){
 					std::cout<< "                ";
 					continue;
@@ -99,6 +110,12 @@ static void horizontalMessage( letterArray *letters, std::string message ){
 	}
 }
 
+/* Prints out the message in isometric font in a vertical orientation 
+ * ARGS: 
+ *		arg 1: *letters -- letterArray that holds the isoLetter arrays
+ *		arg 2: message -- message to be translated
+ *
+*/
 static void verticalMessage( letterArray *letters, std::string message ){
 	if( h_orientation == 'n' || h_orientation == 'N' ){
 		std::string::iterator it;
@@ -116,6 +133,13 @@ static void verticalMessage( letterArray *letters, std::string message ){
 	}
 }
 
+/* Saves the message to an outfile in isometric font in a horizontal orientation 
+ * ARGS: 
+ *		arg 1: *letters -- letterArray that holds the isoLetter arrays
+ *		arg 2: message -- message to be translated
+ *		arg 3: outFile -- ofstream of the output file
+ *
+*/
 static void saveHorizontalMessage( letterArray *letters, std::string message, std::ofstream& outFile ){
 	if( saveToFile == 'y' || saveToFile == 'Y' ){
 		std::cout << "WARNING: Text editor must have word wrap disabled to properly display longer sentences." << std::endl;
@@ -142,6 +166,13 @@ static void saveHorizontalMessage( letterArray *letters, std::string message, st
 	}	
 }
 
+/* Saves the message to an outfile in isometric font in a vertical orientation 
+ * ARGS: 
+ *		arg 1: *letters -- letterArray that holds the isoLetter arrays
+ *		arg 2: message -- message to be translated
+ *		arg 3: outFile -- ofstream outfile for the translated message
+ *
+*/
 static void saveVerticalMessage( letterArray *letters, std::string message, std::ofstream& outFile ){
 	if( saveToFile == 'y' || saveToFile == 'Y' ){
 		std::string::iterator it;
@@ -166,6 +197,10 @@ static void saveVerticalMessage( letterArray *letters, std::string message, std:
 	}
 }
 
+/* Takes care of unchecked pointers and memory leaks
+ * ARGS: 
+ *		arg 1: letters -- letterArray that needs to be cleaned 
+ */
 static void cleanUp( letterArray *letters ){
 	for( int i = 0; i < NUM_LETTERS; i++ ){
 		delete letters->letterA[i];

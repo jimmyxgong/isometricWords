@@ -1,6 +1,6 @@
 /* Author: Jimmy X Gong
  * File Name: letterArray.hpp
- * Description:
+ * Description: header file for letterArray.cpp
  */
 
 #ifndef LETTERARRAY_HPP
