@@ -24,6 +24,7 @@ static std::string toUpperCase( std::string message );
 static void horizontalMessage( letterArray *letters, std::string message );
 static void verticalMessage( letterArray *letters, std::string message );
 static void saveHorizontalMessage( letterArray *letters, std::string message, std::ofstream& outFile );
+static void saveVerticalMessage( letterArray *letters, std::string message, std::ofstream& outFile );
 
 /* Main program */
 int main(){
@@ -49,10 +50,13 @@ int main(){
 	verticalMessage( letters, message );
 	
 	std::cout << "Save message to a text file? (y/n)" << std::endl;
-	std::cout << "WARNING: Text editor must have word wrap disabled to properly display longer sentences." << std::endl;
 	std::cin >> saveToFile;
 
-	saveHorizontalMessage( letters, message, outFile );
+	if( h_orientation == 'y' || h_orientation == 'Y'){
+		saveHorizontalMessage( letters, message, outFile );
+	} else if( h_orientation == 'n' || h_orientation == 'N' ){
+		saveVerticalMessage( letters, message, outFile );
+	}
 
 	return 0;
 }
@@ -110,7 +114,7 @@ static void verticalMessage( letterArray *letters, std::string message ){
 
 static void saveHorizontalMessage( letterArray *letters, std::string message, std::ofstream& outFile ){
 	if( saveToFile == 'y' || saveToFile == 'Y' ){
-
+		std::cout << "WARNING: Text editor must have word wrap disabled to properly display longer sentences." << std::endl;
 		std::string::iterator it;
 
 		for( int i = 0; i<MAXHEIGHT; i++ ){
@@ -132,4 +136,28 @@ static void saveHorizontalMessage( letterArray *letters, std::string message, st
 
 		std::cout << "Saved to file output.txt" << std::endl;
 	}	
+}
+
+static void saveVerticalMessage( letterArray *letters, std::string message, std::ofstream& outFile ){
+	if( saveToFile == 'y' || saveToFile == 'Y' ){
+		std::string::iterator it;
+
+		for( it = message.begin(); it < message.end(); it++ ){
+			char currChar = *it;
+			for( int i = 0; i < MAXHEIGHT; i++ ){
+				if( currChar == ' ' ){
+					outFile << "\n\n\n\n";
+					break;
+				}
+				std::string toDraw;
+				int currVal = currChar - ASCII_BUF;
+				toDraw = letters->letterA[currVal]->lineToDraw( i );
+				outFile<<toDraw;
+				outFile<<'\n';
+			}
+		}
+		outFile.close();
+
+		std::cout << "Saved to file output.txt" << std::endl;
+	}
 }
