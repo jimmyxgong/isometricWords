@@ -6,7 +6,7 @@
 #ifndef LETTERARRAY_HPP
 #define LETTERARRAY_HPP
 
-const int NUM_LETTERS = 25;
+const int NUM_LETTERS = 26;
 
 #include <iostream>
 #include "isoLetters.hpp"

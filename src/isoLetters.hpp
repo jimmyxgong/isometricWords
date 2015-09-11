@@ -23,7 +23,7 @@ class isoLetters{
 
 		char getLetter();
 		void drawHoriz( int place );
-		void drawVert( int place );
+		void drawVert();
 		std::string lineToDraw( int place );
 };
 
