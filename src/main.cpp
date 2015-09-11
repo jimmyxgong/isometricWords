@@ -25,6 +25,7 @@ static void horizontalMessage( letterArray *letters, std::string message );
 static void verticalMessage( letterArray *letters, std::string message );
 static void saveHorizontalMessage( letterArray *letters, std::string message, std::ofstream& outFile );
 static void saveVerticalMessage( letterArray *letters, std::string message, std::ofstream& outFile );
+static void cleanUp( letterArray *letters );
 
 /* Main program */
 int main(){
@@ -57,6 +58,9 @@ int main(){
 	} else if( h_orientation == 'n' || h_orientation == 'N' ){
 		saveVerticalMessage( letters, message, outFile );
 	}
+
+	// Cleaning up memory leaks
+	cleanUp( letters );
 
 	return 0;
 }
@@ -160,4 +164,12 @@ static void saveVerticalMessage( letterArray *letters, std::string message, std:
 
 		std::cout << "Saved to file output.txt" << std::endl;
 	}
+}
+
+static void cleanUp( letterArray *letters ){
+	for( int i = 0; i < NUM_LETTERS; i++ ){
+		delete letters->letterA[i];
+	}
+	delete letters;
+	letters = 0;
 }

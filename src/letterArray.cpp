@@ -8,13 +8,14 @@
  #include "letterArray.hpp"
 
 // constructor
-letterArray::letterArray(){
+letterArray::letterArray(){}
 
-}
+//deconstructor
+letterArray::~letterArray(){}
 
 // member function implementations
 void letterArray::makeArray(){
 	for( int i = 0; i<NUM_LETTERS; i++ ){
-		this->letterA[i] = new isoLetters( i + ASCII_BUF ); 
+		this->letterA[i] = new isoLetters( i + ASCII_BUF );  
 	}
 }
