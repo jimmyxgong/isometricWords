@@ -4,7 +4,7 @@ CC= g++
 CXX= g++
 CXXFLAGS= -std=c++11
 
-objects = isoLetters.o letterArray.o main.o
+objects = isoLetters.o letterArray.o
 
 isoLetters: isoLetters.o letterArray.o
 	g++ -o isometricWords isoLetters.o letterArray.o main.cpp

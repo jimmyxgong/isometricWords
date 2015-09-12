@@ -16,10 +16,12 @@ static int MAXDISPLAYLENGTH = 12;
 static char saveToFile;
 static char h_orientation;
 static int stringLength;
+static bool exit_P = false;
 
 /* ===== Static function declarations ===== */
 
 static std::string toUpperCase( std::string message );
+static void messageCheck( std::string message );
 static void horizontalMessage( letterArray *letters, std::string message );
 static void verticalMessage( letterArray *letters, std::string message );
 static void saveHorizontalMessage( letterArray *letters, std::string message, std::ofstream& outFile );
@@ -33,9 +35,7 @@ int main(){
 
 	std::cout << "Please type in your message" << std::endl;
 	std::getline(std::cin, message);
-	std::cout << "Horizontal orientation? (y/n)" << std::endl;
-	std::cin >> h_orientation;
-
+	
 	stringLength = message.length();
 
 	// creating the isoLetter array
@@ -44,6 +44,18 @@ int main(){
 
 	// converts message to all uppercase
 	message = toUpperCase( message );
+
+	// checks if valid message
+	while( exit_P == false ){
+		messageCheck( message );
+		if( exit_P == false ){
+			std::getline(std::cin, message);
+			message = toUpperCase( message );
+		}
+	}
+
+	std::cout << "Horizontal orientation? (y/n)" << std::endl;
+	std::cin >> h_orientation;
 	
 	// translates in horizontal or vertical orientation
 	horizontalMessage( letters, message );
@@ -77,6 +89,21 @@ static std::string toUpperCase( std::string message ){
 	}
 
 	return message;
+}
+
+/* Checks if inputted message is valid */
+static void messageCheck( std::string message ){
+	std::string::iterator it;
+
+	for( it = message.begin(); it < message.end(); it++ ){
+		int charNum = *it;
+		if( (charNum != 32) && ( (charNum < 64) || (charNum > 90) ) ){
+			std::cout << "Invalid message." << std::endl;
+			std::cout << "Please type a message only with a-z, A-Z characters." << std::endl;
+			exit_P = false;
+			return;
+		} else{ exit_P = true; }
+	}
 }
 
 /* Prints out the message in isometric font in a horizontal orientation 
@@ -142,7 +169,7 @@ static void verticalMessage( letterArray *letters, std::string message ){
 */
 static void saveHorizontalMessage( letterArray *letters, std::string message, std::ofstream& outFile ){
 	if( saveToFile == 'y' || saveToFile == 'Y' ){
-		std::cout << "WARNING: Text editor must have word wrap disabled to properly display longer sentences." << std::endl;
+		std::cout << "NOTE: Text editor must have word wrap disabled to properly display longer sentences." << std::endl;
 		std::string::iterator it;
 
 		for( int i = 0; i<MAXHEIGHT; i++ ){
