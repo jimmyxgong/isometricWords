@@ -10,7 +10,7 @@
  
 /* ===== constructor ===== */
 isoLetters::isoLetters( char iso_L ){
-	this->letter = iso_L;
+    this->letter = iso_L;
 }
 
 /* ===== deconstructor ===== */
@@ -24,13 +24,13 @@ isoLetters::~isoLetters(){}
  *      arg 1: place -- varies from 1-11. Defines which line of letter to print 
  */
 void isoLetters::drawHoriz( int place ){
-	std::ifstream fontFile( "fonts/isometric4.txt" );
+    std::ifstream fontFile( "fonts/isometric4.txt" );
     std::string line;
 
     if (!fontFile) std::cerr << "Could not open the file!" << std::endl;
 
-	int ascii = this->letter - ASCII_BUF;
-	int position = (ascii*MAXHEIGHT)+place;		// location to copy
+    int ascii = this->letter - ASCII_BUF;
+    int position = (ascii*MAXHEIGHT)+place;		// location to copy
     int count = 0;
 
     // copying line from font file into output file
@@ -46,7 +46,7 @@ void isoLetters::drawHoriz( int place ){
 
 /* Prints out the line from font text file of a letter */
 void isoLetters::drawVert(){
-	std::ifstream fontFile( "fonts/isometric4.txt" );
+    std::ifstream fontFile( "fonts/isometric4.txt" );
     std::string line;
 
     if(!fontFile) std::cerr << "Could not open the file!" << std::endl;
@@ -93,5 +93,5 @@ std::string isoLetters::lineToDraw( int place ){
 }
 
 char isoLetters::getLetter(){
-	return this->letter;
+    return this->letter;
 }
